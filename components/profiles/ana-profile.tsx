@@ -500,6 +500,48 @@ export default function AnaProfile() {
         </div>
       </div>
 
+      {/* Habilidades con barras de progreso creativas */}
+      <div>
+        <h2 className="text-2xl font-bold mb-6 flex items-center">
+          <Layers className="mr-2" /> Nivel de Habilidades
+        </h2>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          {[
+            { name: "Figma", level: 95, color: "#FF7262" },
+            { name: "React", level: 88, color: "#61DAFB" },
+            { name: "Tailwind CSS", level: 90, color: "#38BDF8" },
+            { name: "Adobe XD", level: 85, color: "#FF61F6" },
+            { name: "Sketch", level: 80, color: "#F7B801" },
+            { name: "Responsive Design", level: 92, color: "#10B981" },
+            { name: "Accessibility", level: 88, color: "#8B5CF6" },
+            { name: "Prototyping", level: 90, color: "#F59E0B" },
+            { name: "User Research", level: 85, color: "#EF4444" },
+            { name: "CSS3", level: 87, color: "#06B6D4" },
+          ].map((skill) => (
+            <div key={skill.name} className="space-y-3">
+              <div className="flex justify-between items-center">
+                <span className="font-medium text-gray-700">{skill.name}</span>
+                <span
+                  className="text-sm font-bold px-2 py-1 rounded-full text-white"
+                  style={{ backgroundColor: skill.color }}
+                >
+                  {skill.level}%
+                </span>
+              </div>
+              <div className="w-full bg-gray-200 rounded-full h-3 overflow-hidden shadow-inner">
+                <div
+                  className="h-full rounded-full transition-all duration-1000 ease-out shadow-sm"
+                  style={{
+                    width: `${skill.level}%`,
+                    background: `linear-gradient(90deg, ${skill.color}CC, ${skill.color})`,
+                  }}
+                ></div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
       {/* Habilidades - Estilo de etiquetas creativas */}
       <div>
         <h2 className="text-2xl font-bold mb-6 flex items-center">

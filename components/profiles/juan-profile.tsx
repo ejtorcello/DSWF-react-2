@@ -349,23 +349,37 @@ export default function JuanProfile() {
         </div>
       </div>
 
-      {/* Habilidades - Estilo de código */}
+      {/* Habilidades con barras de progreso animadas */}
       <div>
-        <h2 className="text-2xl font-bold mb-4 flex items-center">
-          <Laptop className="mr-2" /> Habilidades
+        <h2 className="text-2xl font-bold mb-6 flex items-center">
+          <Laptop className="mr-2" /> Habilidades Técnicas
         </h2>
-        <div className="bg-slate-900 p-4 rounded-lg">
-          <code className="text-green-400 font-mono">
-            const skills = [
-            <div className="ml-4 flex flex-wrap gap-2 mt-2">
-              {skills.map((skill, index) => (
-                <span key={skill} className="text-orange-300">
-                  "{skill}"{index < skills.length - 1 ? "," : ""}
-                </span>
-              ))}
+        <div className="bg-white p-6 rounded-lg shadow-lg space-y-4">
+          {[
+            { name: "JavaScript", level: 95 },
+            { name: "TypeScript", level: 90 },
+            { name: "React", level: 92 },
+            { name: "Next.js", level: 88 },
+            { name: "Tailwind CSS", level: 85 },
+            { name: "HTML5", level: 98 },
+            { name: "CSS3", level: 90 },
+            { name: "Git", level: 87 },
+            { name: "Redux", level: 80 },
+            { name: "Jest", level: 75 },
+          ].map((skill) => (
+            <div key={skill.name} className="space-y-2">
+              <div className="flex justify-between items-center">
+                <span className="font-medium text-gray-700">{skill.name}</span>
+                <span className="text-sm text-blue-600 font-mono">{skill.level}%</span>
+              </div>
+              <div className="w-full bg-gray-200 rounded-full h-3 overflow-hidden">
+                <div
+                  className="h-full bg-gradient-to-r from-blue-500 to-indigo-600 rounded-full transition-all duration-1000 ease-out"
+                  style={{ width: `${skill.level}%` }}
+                ></div>
+              </div>
             </div>
-            ];
-          </code>
+          ))}
         </div>
       </div>
 

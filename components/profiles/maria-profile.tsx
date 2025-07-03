@@ -407,18 +407,49 @@ export default function MariaProfile() {
 
         {/* Habilidades */}
         <TabsContent value="skills">
-          <h2 className="text-2xl font-bold mb-4 flex items-center">
+          <h2 className="text-2xl font-bold mb-6 flex items-center">
             <Terminal className="mr-2" /> Habilidades Técnicas
           </h2>
-          <div className="grid grid-cols-2 md:grid-cols-5 gap-3">
-            {skills.map((skill) => (
-              <div
-                key={skill}
-                className="bg-black text-green-400 p-3 rounded-md font-mono text-center flex items-center justify-center"
-              >
-                {skill}
+          <div className="space-y-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              {[
+                { name: "Node.js", level: 95 },
+                { name: "Express", level: 90 },
+                { name: "MongoDB", level: 88 },
+                { name: "PostgreSQL", level: 85 },
+                { name: "API REST", level: 92 },
+                { name: "Docker", level: 80 },
+                { name: "AWS", level: 75 },
+                { name: "Python", level: 70 },
+                { name: "SQL", level: 87 },
+                { name: "Redis", level: 78 },
+              ].map((skill) => (
+                <div key={skill.name} className="space-y-2">
+                  <div className="flex justify-between items-center">
+                    <span className="font-medium text-gray-200">{skill.name}</span>
+                    <span className="text-sm text-green-400 font-mono">{skill.level}%</span>
+                  </div>
+                  <div className="w-full bg-gray-700 rounded-full h-2 overflow-hidden">
+                    <div
+                      className="h-full bg-gradient-to-r from-green-400 to-teal-500 rounded-full transition-all duration-1000 ease-out"
+                      style={{ width: `${skill.level}%` }}
+                    ></div>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            {/* Terminal style display */}
+            <div className="bg-black text-green-400 p-4 rounded-lg font-mono text-sm">
+              <div className="mb-2">
+                <span className="text-blue-400">$</span> npm list --global --depth=0
               </div>
-            ))}
+              <div className="space-y-1 ml-4">
+                {skills.map((skill) => (
+                  <div key={skill}>├── {skill}@latest</div>
+                ))}
+              </div>
+            </div>
           </div>
         </TabsContent>
 
