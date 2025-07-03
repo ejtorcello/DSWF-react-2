@@ -2,7 +2,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle, CardFooter }
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { Github, Linkedin, Mail, Database, Server, Code, Terminal } from "lucide-react"
+import { Github, Linkedin, Mail, Database, Server, Code, Terminal, Twitter, Globe } from "lucide-react"
 
 // Lista de habilidades para María
 const skills = ["Node.js", "Express", "MongoDB", "PostgreSQL", "API REST", "Docker", "AWS", "Python", "SQL", "Redis"]
@@ -40,6 +40,90 @@ const projects = [
     link: "#",
   },
 ]
+
+// Componente de botones de redes sociales animados para María
+const AnimatedSocialButtons = () => {
+  const socialLinks = [
+    {
+      name: "GitHub",
+      icon: Github,
+      url: "https://github.com/maria-garcia",
+      color: "hover:bg-gray-900",
+      textColor: "hover:text-white",
+      borderColor: "hover:border-gray-900",
+    },
+    {
+      name: "LinkedIn",
+      icon: Linkedin,
+      url: "https://linkedin.com/in/maria-garcia",
+      color: "hover:bg-blue-600",
+      textColor: "hover:text-white",
+      borderColor: "hover:border-blue-600",
+    },
+    {
+      name: "Twitter",
+      icon: Twitter,
+      url: "https://twitter.com/maria_backend",
+      color: "hover:bg-sky-500",
+      textColor: "hover:text-white",
+      borderColor: "hover:border-sky-500",
+    },
+    {
+      name: "Email",
+      icon: Mail,
+      url: "mailto:maria.garcia@email.com",
+      color: "hover:bg-green-600",
+      textColor: "hover:text-white",
+      borderColor: "hover:border-green-600",
+    },
+    {
+      name: "Portfolio",
+      icon: Globe,
+      url: "https://maria-garcia.dev",
+      color: "hover:bg-purple-600",
+      textColor: "hover:text-white",
+      borderColor: "hover:border-purple-600",
+    },
+  ]
+
+  return (
+    <div className="flex gap-2 flex-wrap justify-center">
+      {socialLinks.map((social) => {
+        const IconComponent = social.icon
+        return (
+          <a
+            key={social.name}
+            href={social.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            className={`
+              group relative overflow-hidden rounded-lg p-3 transition-all duration-500 ease-out
+              transform hover:scale-105 hover:-translate-y-1 hover:shadow-xl
+              bg-gray-100 border-2 border-gray-200
+              ${social.color} ${social.textColor} ${social.borderColor}
+              before:absolute before:inset-0 before:bg-current before:opacity-0 before:transition-opacity before:duration-300
+              hover:before:opacity-10
+            `}
+            title={social.name}
+          >
+            <IconComponent className="w-5 h-5 relative z-10 transition-all duration-300 group-hover:rotate-12" />
+
+            {/* Efecto de brillo */}
+            <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+              <div className="absolute top-0 left-0 w-full h-0.5 bg-current animate-pulse"></div>
+            </div>
+
+            {/* Tooltip con estilo terminal */}
+            <div className="absolute -top-12 left-1/2 transform -translate-x-1/2 bg-black text-green-400 text-xs px-3 py-1 rounded font-mono opacity-0 group-hover:opacity-100 transition-all duration-300 pointer-events-none border border-green-400">
+              <span className="text-blue-400">$</span> open {social.name.toLowerCase()}
+              <div className="absolute top-full left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-4 border-r-4 border-t-4 border-transparent border-t-black"></div>
+            </div>
+          </a>
+        )
+      })}
+    </div>
+  )
+}
 
 export default function MariaProfile() {
   // Estilo técnico con enfoque en backend y datos
@@ -84,25 +168,14 @@ export default function MariaProfile() {
           <CardTitle>Sobre mí</CardTitle>
         </CardHeader>
         <CardContent>
-          <p className="text-gray-600">
+          <p className="text-gray-600 mb-4">
             Desarrolladora backend especializada en Node.js y arquitectura de APIs. Con experiencia en bases de datos
             relacionales y no relacionales. Enfocada en crear sistemas escalables y seguros.
           </p>
+
+          {/* Botones de redes sociales animados */}
+          <AnimatedSocialButtons />
         </CardContent>
-        <CardFooter className="flex gap-2">
-          <Button variant="outline" size="sm">
-            <Github className="w-4 h-4 mr-1" />
-            GitHub
-          </Button>
-          <Button variant="outline" size="sm">
-            <Linkedin className="w-4 h-4 mr-1" />
-            LinkedIn
-          </Button>
-          <Button variant="outline" size="sm">
-            <Mail className="w-4 h-4 mr-1" />
-            Email
-          </Button>
-        </CardFooter>
       </Card>
 
       {/* Tabs para organizar contenido */}

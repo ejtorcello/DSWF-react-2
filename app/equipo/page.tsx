@@ -1,7 +1,7 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
-import { Github, Linkedin, Mail } from "lucide-react"
+import { Github, Linkedin, Mail, Twitter, Instagram, Globe } from "lucide-react"
 import Link from "next/link"
 
 const teamMembers = [
@@ -14,6 +14,12 @@ const teamMembers = [
     description:
       "Lidera el desarrollo frontend y coordina las tareas del equipo. Especialista en React y experiencia de usuario.",
     responsibilities: ["Coordinación del equipo", "Desarrollo de componentes React", "Diseño de interfaces"],
+    socialLinks: [
+      { name: "GitHub", icon: Github, url: "https://github.com/juan-perez", color: "hover:text-gray-800" },
+      { name: "LinkedIn", icon: Linkedin, url: "https://linkedin.com/in/juan-perez", color: "hover:text-blue-600" },
+      { name: "Twitter", icon: Twitter, url: "https://twitter.com/juan_perez_dev", color: "hover:text-sky-500" },
+      { name: "Email", icon: Mail, url: "mailto:juan.perez@email.com", color: "hover:text-red-500" },
+    ],
   },
   {
     id: "maria",
@@ -23,6 +29,12 @@ const teamMembers = [
     skills: ["Node.js", "Express", "MongoDB", "API REST"],
     description: "Experta en desarrollo backend y arquitectura de APIs. Maneja la integración con servicios externos.",
     responsibilities: ["Desarrollo de APIs", "Integración con servicios externos", "Gestión de datos"],
+    socialLinks: [
+      { name: "GitHub", icon: Github, url: "https://github.com/maria-garcia", color: "hover:text-gray-800" },
+      { name: "LinkedIn", icon: Linkedin, url: "https://linkedin.com/in/maria-garcia", color: "hover:text-blue-600" },
+      { name: "Twitter", icon: Twitter, url: "https://twitter.com/maria_backend", color: "hover:text-sky-500" },
+      { name: "Email", icon: Mail, url: "mailto:maria.garcia@email.com", color: "hover:text-green-600" },
+    ],
   },
   {
     id: "carlos",
@@ -33,6 +45,12 @@ const teamMembers = [
     description:
       "Desarrollador full stack con experiencia en múltiples tecnologías. Especialista en integración frontend-backend.",
     responsibilities: ["Desarrollo full stack", "Integración de sistemas", "Control de versiones"],
+    socialLinks: [
+      { name: "GitHub", icon: Github, url: "https://github.com/carlos-lopez", color: "hover:text-gray-800" },
+      { name: "LinkedIn", icon: Linkedin, url: "https://linkedin.com/in/carlos-lopez", color: "hover:text-blue-600" },
+      { name: "Globe", icon: Globe, url: "https://carlos-lopez.dev", color: "hover:text-purple-600" },
+      { name: "Email", icon: Mail, url: "mailto:carlos.lopez@email.com", color: "hover:text-red-500" },
+    ],
   },
   {
     id: "ana",
@@ -43,8 +61,52 @@ const teamMembers = [
     description:
       "Diseñadora y desarrolladora enfocada en experiencia de usuario. Crea interfaces intuitivas y atractivas.",
     responsibilities: ["Diseño UI/UX", "Prototipado", "Documentación del proyecto"],
+    socialLinks: [
+      { name: "GitHub", icon: Github, url: "https://github.com/ana-martinez", color: "hover:text-gray-800" },
+      { name: "LinkedIn", icon: Linkedin, url: "https://linkedin.com/in/ana-martinez", color: "hover:text-blue-600" },
+      { name: "Instagram", icon: Instagram, url: "https://instagram.com/ana_design", color: "hover:text-pink-500" },
+      { name: "Email", icon: Mail, url: "mailto:ana.martinez@email.com", color: "hover:text-teal-500" },
+    ],
   },
 ]
+
+// Componente de botones de redes sociales animados
+const AnimatedSocialButtons = ({ socialLinks }: { socialLinks: any[] }) => {
+  return (
+    <div className="flex gap-2">
+      {socialLinks.map((social) => {
+        const IconComponent = social.icon
+        return (
+          <a
+            key={social.name}
+            href={social.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            className={`
+              group relative overflow-hidden rounded-full p-2 transition-all duration-300 ease-in-out
+              transform hover:scale-110 hover:shadow-lg
+              bg-gray-100 hover:bg-white border border-gray-200 hover:border-current
+              ${social.color}
+            `}
+            title={social.name}
+          >
+            <IconComponent className="w-4 h-4 transition-transform duration-300 group-hover:rotate-12" />
+
+            {/* Efecto de ondas al hover */}
+            <div className="absolute inset-0 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+              <div className="absolute inset-0 rounded-full animate-ping bg-current opacity-20"></div>
+            </div>
+
+            {/* Tooltip */}
+            <div className="absolute -top-8 left-1/2 transform -translate-x-1/2 bg-gray-800 text-white text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
+              {social.name}
+            </div>
+          </a>
+        )
+      })}
+    </div>
+  )
+}
 
 export default function EquipoPage() {
   return (
@@ -99,19 +161,13 @@ export default function EquipoPage() {
                 </div>
               </div>
 
-              <div className="flex gap-2 pt-4">
+              <div className="flex gap-2 pt-4 items-center justify-between">
                 <Button asChild variant="outline" size="sm">
                   <Link href={`/integrante/${member.id}`}>Ver Perfil Completo</Link>
                 </Button>
-                <Button variant="ghost" size="sm">
-                  <Github className="w-4 h-4" />
-                </Button>
-                <Button variant="ghost" size="sm">
-                  <Linkedin className="w-4 h-4" />
-                </Button>
-                <Button variant="ghost" size="sm">
-                  <Mail className="w-4 h-4" />
-                </Button>
+
+                {/* Botones de redes sociales animados */}
+                <AnimatedSocialButtons socialLinks={member.socialLinks} />
               </div>
             </CardContent>
           </Card>

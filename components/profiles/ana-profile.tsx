@@ -1,7 +1,9 @@
+"use client"
+
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
-import { Github, Linkedin, Mail, ExternalLink, Palette, Layers, Monitor } from "lucide-react"
+import { Github, Linkedin, Mail, ExternalLink, Palette, Layers, Monitor, Instagram, Dribbble } from "lucide-react"
 import { Separator } from "@/components/ui/separator"
 
 // Lista de habilidades para Ana
@@ -55,6 +57,90 @@ const projects = [
   },
 ]
 
+// Componente de botones de redes sociales animados para Ana
+const AnimatedSocialButtons = () => {
+  const socialLinks = [
+    {
+      name: "GitHub",
+      icon: Github,
+      colors: "from-gray-600 to-gray-800",
+      hoverColors: "hover:from-gray-700 hover:to-gray-900",
+      shadowColor: "hover:shadow-gray-500/50",
+    },
+    {
+      name: "LinkedIn",
+      icon: Linkedin,
+      colors: "from-blue-500 to-blue-700",
+      hoverColors: "hover:from-blue-600 hover:to-blue-800",
+      shadowColor: "hover:shadow-blue-500/50",
+    },
+    {
+      name: "Dribbble",
+      icon: Dribbble,
+      colors: "from-pink-500 to-rose-600",
+      hoverColors: "hover:from-pink-600 hover:to-rose-700",
+      shadowColor: "hover:shadow-pink-500/50",
+    },
+    {
+      name: "Instagram",
+      icon: Instagram,
+      colors: "from-purple-500 via-pink-500 to-orange-500",
+      hoverColors: "hover:from-purple-600 hover:via-pink-600 hover:to-orange-600",
+      shadowColor: "hover:shadow-purple-500/50",
+    },
+    {
+      name: "Email",
+      icon: Mail,
+      colors: "from-teal-500 to-cyan-600",
+      hoverColors: "hover:from-teal-600 hover:to-cyan-700",
+      shadowColor: "hover:shadow-teal-500/50",
+    },
+  ]
+
+  return (
+    <div className="flex gap-4 justify-center md:justify-start flex-wrap">
+      {socialLinks.map((social) => {
+        const IconComponent = social.icon
+        return (
+          <a
+            key={social.name}
+            href={`https://${social.name.toLowerCase()}.com/ana-martinez`}
+            target="_blank"
+            rel="noopener noreferrer"
+            className={`
+              group relative overflow-hidden rounded-2xl p-4 transition-all duration-500 ease-out
+              transform hover:scale-110 hover:rotate-3 hover:shadow-2xl
+              bg-gradient-to-br ${social.colors} ${social.hoverColors} ${social.shadowColor}
+              text-white
+              before:absolute before:inset-0 before:bg-white before:opacity-0 before:transition-opacity before:duration-300
+              hover:before:opacity-20
+              after:absolute after:inset-0 after:bg-gradient-to-r after:from-transparent after:via-white after:to-transparent
+              after:opacity-0 after:translate-x-[-100%] hover:after:opacity-30 hover:after:translate-x-[100%]
+              after:transition-all after:duration-700
+            `}
+            title={social.name}
+          >
+            <IconComponent className="w-6 h-6 relative z-10 transition-all duration-300 group-hover:scale-110" />
+
+            {/* Efecto de partículas */}
+            <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+              <div className="absolute top-2 left-2 w-1 h-1 bg-white rounded-full animate-ping"></div>
+              <div className="absolute bottom-2 right-2 w-1 h-1 bg-white rounded-full animate-ping animation-delay-200"></div>
+              <div className="absolute top-1/2 right-2 w-1 h-1 bg-white rounded-full animate-ping animation-delay-400"></div>
+            </div>
+
+            {/* Tooltip creativo */}
+            <div className="absolute -top-14 left-1/2 transform -translate-x-1/2 bg-white text-gray-800 text-sm px-4 py-2 rounded-full opacity-0 group-hover:opacity-100 transition-all duration-300 pointer-events-none shadow-lg border-2 border-current">
+              <span className="font-medium">{social.name}</span>
+              <div className="absolute top-full left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-4 border-r-4 border-t-4 border-transparent border-t-white"></div>
+            </div>
+          </a>
+        )
+      })}
+    </div>
+  )
+}
+
 export default function AnaProfile() {
   // Estilo creativo y visual con enfoque en diseño
   return (
@@ -77,25 +163,14 @@ export default function AnaProfile() {
                 Ana Martínez
               </h1>
               <p className="text-xl text-gray-600 mb-4">UI/UX Designer & Developer</p>
-              <p className="text-gray-600 max-w-2xl">
+              <p className="text-gray-600 max-w-2xl mb-6">
                 Diseñadora y desarrolladora enfocada en experiencia de usuario. Combina habilidades de diseño con
                 conocimientos técnicos para crear interfaces excepcionales. Especialista en design systems y
                 accesibilidad.
               </p>
-              <div className="flex gap-3 mt-6 justify-center md:justify-start">
-                <Button className="rounded-full bg-gradient-to-r from-purple-600 to-pink-500 hover:from-purple-700 hover:to-pink-600">
-                  <Mail className="w-4 h-4 mr-1" />
-                  Contacto
-                </Button>
-                <Button variant="outline" className="rounded-full">
-                  <Github className="w-4 h-4 mr-1" />
-                  GitHub
-                </Button>
-                <Button variant="outline" className="rounded-full">
-                  <Linkedin className="w-4 h-4 mr-1" />
-                  LinkedIn
-                </Button>
-              </div>
+
+              {/* Botones de redes sociales animados */}
+              <AnimatedSocialButtons />
             </div>
           </div>
         </div>
@@ -276,6 +351,16 @@ export default function AnaProfile() {
           Diseñado con <span className="text-pink-500">♥</span> por Ana Martínez • {new Date().getFullYear()}
         </p>
       </div>
+
+      {/* Estilos adicionales para animaciones */}
+      <style jsx global>{`
+        .animation-delay-200 {
+          animation-delay: 200ms;
+        }
+        .animation-delay-400 {
+          animation-delay: 400ms;
+        }
+      `}</style>
     </div>
   )
 }

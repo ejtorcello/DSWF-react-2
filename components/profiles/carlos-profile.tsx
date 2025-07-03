@@ -4,7 +4,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Progress } from "@/components/ui/progress"
-import { Github, Linkedin, Mail, ExternalLink, Code, Server, Globe } from "lucide-react"
+import { Github, Linkedin, Mail, ExternalLink, Code, Server, Globe, Twitter, Youtube } from "lucide-react"
 import { Separator } from "@/components/ui/separator"
 
 // Lista de habilidades para Carlos con niveles
@@ -53,37 +53,105 @@ const projects = [
   },
 ]
 
+// Componente de botones de redes sociales animados para Carlos
+const AnimatedSocialButtons = () => {
+  const socialLinks = [
+    {
+      name: "GitHub",
+      icon: Github,
+      url: "https://github.com/carlos-lopez",
+      gradient: "from-gray-600 to-gray-800",
+      hoverGradient: "hover:from-gray-700 hover:to-gray-900",
+    },
+    {
+      name: "LinkedIn",
+      icon: Linkedin,
+      url: "https://linkedin.com/in/carlos-lopez",
+      gradient: "from-blue-500 to-blue-700",
+      hoverGradient: "hover:from-blue-600 hover:to-blue-800",
+    },
+    {
+      name: "Twitter",
+      icon: Twitter,
+      url: "https://twitter.com/carlos_fullstack",
+      gradient: "from-sky-400 to-sky-600",
+      hoverGradient: "hover:from-sky-500 hover:to-sky-700",
+    },
+    {
+      name: "Email",
+      icon: Mail,
+      url: "mailto:carlos.lopez@email.com",
+      gradient: "from-red-500 to-red-700",
+      hoverGradient: "hover:from-red-600 hover:to-red-800",
+    },
+    {
+      name: "YouTube",
+      icon: Youtube,
+      url: "https://youtube.com/@carlos-dev",
+      gradient: "from-red-600 to-red-800",
+      hoverGradient: "hover:from-red-700 hover:to-red-900",
+    },
+  ]
+
+  return (
+    <div className="flex gap-4 justify-center md:justify-start">
+      {socialLinks.map((social) => {
+        const IconComponent = social.icon
+        return (
+          <a
+            key={social.name}
+            href={social.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            className={`
+              group relative overflow-hidden rounded-full p-4 transition-all duration-300 ease-in-out
+              transform hover:scale-110 hover:shadow-2xl
+              bg-gradient-to-r ${social.gradient} ${social.hoverGradient}
+              text-white
+              before:absolute before:inset-0 before:bg-white before:opacity-0 before:transition-opacity before:duration-300
+              hover:before:opacity-20
+            `}
+            title={social.name}
+          >
+            <IconComponent className="w-6 h-6 relative z-10 transition-all duration-300 group-hover:rotate-6" />
+
+            {/* Efecto de pulso */}
+            <div className="absolute inset-0 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+              <div className="absolute inset-0 rounded-full animate-pulse bg-white opacity-30"></div>
+            </div>
+
+            {/* Tooltip corporativo */}
+            <div className="absolute -top-12 left-1/2 transform -translate-x-1/2 bg-gray-900 text-white text-sm px-3 py-2 rounded-lg opacity-0 group-hover:opacity-100 transition-all duration-300 pointer-events-none shadow-lg">
+              {social.name}
+              <div className="absolute top-full left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-4 border-r-4 border-t-4 border-transparent border-t-gray-900"></div>
+            </div>
+          </a>
+        )
+      })}
+    </div>
+  )
+}
+
 export default function CarlosProfile() {
-  // Estilo corpo
+  // Estilo corporativo
   return (
     <div className="space-y-8">
-      {/* Header - Estilo  con gradiente */}
+      {/* Header - Estilo corporativo con gradiente */}
       <div className="bg-gradient-to-r from-blue-700 to-purple-700 text-white p-8 rounded-lg shadow-lg">
         <div className="flex flex-col md:flex-row gap-8 items-center md:items-start">
-         <div className="w-32 h-32 rounded-full overflow-hidden border-4 border-white/30">
-  <img src="/path/to/foto-perfil.jpg" alt="Foto de Carlos López" className="w-full h-full object-cover" />
-</div>
+          <div className="w-32 h-32 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center border-4 border-white/30">
+            <span className="text-4xl font-bold">CL</span>
+          </div>
           <div className="flex-1 text-center md:text-left">
             <h1 className="text-3xl md:text-4xl font-bold mb-2">Carlos López</h1>
             <p className="text-xl text-blue-100 mb-4">Full Stack Developer</p>
-            <p className="text-blue-100 max-w-2xl">
+            <p className="text-blue-100 max-w-2xl mb-6">
               Desarrollador full stack con experiencia en múltiples tecnologías. Especialista en integración
               frontend-backend y optimización de aplicaciones web. Apasionado por las mejores prácticas de desarrollo.
             </p>
-            <div className="flex gap-3 mt-4 justify-center md:justify-start">
-              <Button variant="secondary" size="sm">
-                <Github className="w-4 h-4 mr-1" />
-                GitHub
-              </Button>
-              <Button variant="secondary" size="sm">
-                <Linkedin className="w-4 h-4 mr-1" />
-                LinkedIn
-              </Button>
-              <Button variant="secondary" size="sm">
-                <Mail className="w-4 h-4 mr-1" />
-                Contacto
-              </Button>
-            </div>
+
+            {/* Botones de redes sociales animados */}
+            <AnimatedSocialButtons />
           </div>
         </div>
       </div>
@@ -203,7 +271,7 @@ export default function CarlosProfile() {
                     </Badge>
                   ))}
                 </div>
-                <Button variant="outline" size="sm" className="w-full">
+                <Button variant="outline" size="sm" className="w-full bg-transparent">
                   <ExternalLink className="w-4 h-4 mr-1" />
                   Ver Proyecto
                 </Button>

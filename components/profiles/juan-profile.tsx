@@ -1,7 +1,7 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
-import { Github, Linkedin, Mail, ExternalLink, Code, Terminal, Laptop } from "lucide-react"
+import { Github, Linkedin, Mail, ExternalLink, Code, Terminal, Laptop, Twitter, Instagram } from "lucide-react"
 
 // Lista de habilidades para Juan
 const skills = ["JavaScript", "TypeScript", "React", "Next.js", "Tailwind CSS", "HTML5", "CSS3", "Git", "Redux", "Jest"]
@@ -40,6 +40,82 @@ const projects = [
   },
 ]
 
+// Componente de botones de redes sociales animados
+const AnimatedSocialButtons = () => {
+  const socialLinks = [
+    {
+      name: "GitHub",
+      icon: Github,
+      url: "https://github.com/juan-perez",
+      color: "hover:bg-gray-800 hover:text-white",
+      bgColor: "bg-gray-100",
+    },
+    {
+      name: "LinkedIn",
+      icon: Linkedin,
+      url: "https://linkedin.com/in/juan-perez",
+      color: "hover:bg-blue-600 hover:text-white",
+      bgColor: "bg-blue-50",
+    },
+    {
+      name: "Twitter",
+      icon: Twitter,
+      url: "https://twitter.com/juan_perez_dev",
+      color: "hover:bg-sky-500 hover:text-white",
+      bgColor: "bg-sky-50",
+    },
+    {
+      name: "Email",
+      icon: Mail,
+      url: "mailto:juan.perez@email.com",
+      color: "hover:bg-red-500 hover:text-white",
+      bgColor: "bg-red-50",
+    },
+    {
+      name: "Instagram",
+      icon: Instagram,
+      url: "https://instagram.com/juan_dev",
+      color: "hover:bg-gradient-to-r hover:from-purple-500 hover:to-pink-500 hover:text-white",
+      bgColor: "bg-gradient-to-r from-purple-50 to-pink-50",
+    },
+  ]
+
+  return (
+    <div className="flex gap-3 justify-center md:justify-start">
+      {socialLinks.map((social) => {
+        const IconComponent = social.icon
+        return (
+          <a
+            key={social.name}
+            href={social.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            className={`
+              group relative overflow-hidden rounded-full p-3 transition-all duration-300 ease-in-out
+              transform hover:scale-110 hover:rotate-3 hover:shadow-lg
+              ${social.bgColor} ${social.color}
+              border-2 border-transparent hover:border-current
+            `}
+            title={social.name}
+          >
+            <IconComponent className="w-5 h-5 transition-transform duration-300 group-hover:scale-110" />
+
+            {/* Efecto de ondas al hover */}
+            <div className="absolute inset-0 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+              <div className="absolute inset-0 rounded-full animate-ping bg-current opacity-20"></div>
+            </div>
+
+            {/* Tooltip */}
+            <div className="absolute -top-10 left-1/2 transform -translate-x-1/2 bg-gray-800 text-white text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
+              {social.name}
+            </div>
+          </a>
+        )
+      })}
+    </div>
+  )
+}
+
 export default function JuanProfile() {
   // Estilo minimalista y profesional con énfasis en código
   return (
@@ -60,19 +136,10 @@ export default function JuanProfile() {
             concepción hasta el deployment.
           </p>
         </div>
-        <div className="flex gap-3 mt-4">
-          <Button variant="outline" size="sm" className="rounded-full">
-            <Github className="w-4 h-4 mr-1" />
-            GitHub
-          </Button>
-          <Button variant="outline" size="sm" className="rounded-full">
-            <Linkedin className="w-4 h-4 mr-1" />
-            LinkedIn
-          </Button>
-          <Button variant="outline" size="sm" className="rounded-full">
-            <Mail className="w-4 h-4 mr-1" />
-            Email
-          </Button>
+
+        {/* Botones de redes sociales animados */}
+        <div className="mt-6">
+          <AnimatedSocialButtons />
         </div>
       </div>
 
@@ -175,7 +242,7 @@ export default function JuanProfile() {
                     </Badge>
                   ))}
                 </div>
-                <Button variant="outline" size="sm" className="w-full">
+                <Button variant="outline" size="sm" className="w-full bg-transparent">
                   <ExternalLink className="w-4 h-4 mr-1" />
                   Ver Proyecto
                 </Button>
