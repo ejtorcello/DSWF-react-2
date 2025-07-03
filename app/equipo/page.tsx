@@ -1,204 +1,363 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
-import { Github, Linkedin, Mail, Twitter, Instagram, Globe } from "lucide-react"
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
+import { Github, Linkedin, Mail, MapPin, Calendar, Users, Code, Palette, Server, Database } from "lucide-react"
 import Link from "next/link"
 
+// Datos del equipo
 const teamMembers = [
   {
-    id: "juan",
+    id: 1,
     name: "Juan Pérez",
     role: "Frontend Developer & Coordinador",
-    image: "/placeholder.svg?height=200&width=200",
-    skills: ["React", "TypeScript", "CSS", "Figma"],
+    location: "Buenos Aires, Argentina",
+    experience: "3 años",
+    avatar: "/placeholder-user.jpg",
     description:
-      "Lidera el desarrollo frontend y coordina las tareas del equipo. Especialista en React y experiencia de usuario.",
-    responsibilities: ["Coordinación del equipo", "Desarrollo de componentes React", "Diseño de interfaces"],
-    socialLinks: [
-      { name: "GitHub", icon: Github, url: "https://github.com/juan-perez", color: "hover:text-gray-800" },
-      { name: "LinkedIn", icon: Linkedin, url: "https://linkedin.com/in/juan-perez", color: "hover:text-blue-600" },
-      { name: "Twitter", icon: Twitter, url: "https://twitter.com/juan_perez_dev", color: "hover:text-sky-500" },
-      { name: "Email", icon: Mail, url: "mailto:juan.perez@email.com", color: "hover:text-red-500" },
-    ],
+      "Desarrollador frontend especializado en React y tecnologías modernas. Lidera el equipo y coordina proyectos desde la concepción hasta el deployment.",
+    skills: ["React", "TypeScript", "Next.js", "Tailwind CSS", "Git"],
+    projects: 12,
+    contributions: 450,
+    icon: Code,
+    color: "blue",
+    social: {
+      github: "https://github.com/juan-perez",
+      linkedin: "https://linkedin.com/in/juan-perez",
+      email: "juan.perez@email.com",
+    },
   },
   {
-    id: "maria",
+    id: 2,
     name: "María García",
     role: "Backend Developer",
-    image: "/placeholder.svg?height=200&width=200",
-    skills: ["Node.js", "Express", "MongoDB", "API REST"],
-    description: "Experta en desarrollo backend y arquitectura de APIs. Maneja la integración con servicios externos.",
-    responsibilities: ["Desarrollo de APIs", "Integración con servicios externos", "Gestión de datos"],
-    socialLinks: [
-      { name: "GitHub", icon: Github, url: "https://github.com/maria-garcia", color: "hover:text-gray-800" },
-      { name: "LinkedIn", icon: Linkedin, url: "https://linkedin.com/in/maria-garcia", color: "hover:text-blue-600" },
-      { name: "Twitter", icon: Twitter, url: "https://twitter.com/maria_backend", color: "hover:text-sky-500" },
-      { name: "Email", icon: Mail, url: "mailto:maria.garcia@email.com", color: "hover:text-green-600" },
-    ],
+    location: "Córdoba, Argentina",
+    experience: "4 años",
+    avatar: "/placeholder-user.jpg",
+    description:
+      "Desarrolladora backend especializada en Node.js y arquitectura de APIs. Enfocada en crear sistemas escalables y seguros.",
+    skills: ["Node.js", "Express", "MongoDB", "PostgreSQL", "Docker"],
+    projects: 18,
+    contributions: 620,
+    icon: Server,
+    color: "green",
+    social: {
+      github: "https://github.com/maria-garcia",
+      linkedin: "https://linkedin.com/in/maria-garcia",
+      email: "maria.garcia@email.com",
+    },
   },
   {
-    id: "carlos",
+    id: 3,
     name: "Carlos López",
     role: "Full Stack Developer",
-    image: "/placeholder.svg?height=200&width=200",
-    skills: ["React", "Node.js", "PostgreSQL", "Git"],
+    location: "Rosario, Argentina",
+    experience: "5 años",
+    avatar: "/placeholder-user.jpg",
     description:
-      "Desarrollador full stack con experiencia en múltiples tecnologías. Especialista en integración frontend-backend.",
-    responsibilities: ["Desarrollo full stack", "Integración de sistemas", "Control de versiones"],
-    socialLinks: [
-      { name: "GitHub", icon: Github, url: "https://github.com/carlos-lopez", color: "hover:text-gray-800" },
-      { name: "LinkedIn", icon: Linkedin, url: "https://linkedin.com/in/carlos-lopez", color: "hover:text-blue-600" },
-      { name: "Globe", icon: Globe, url: "https://carlos-lopez.dev", color: "hover:text-purple-600" },
-      { name: "Email", icon: Mail, url: "mailto:carlos.lopez@email.com", color: "hover:text-red-500" },
-    ],
+      "Desarrollador full stack con experiencia en múltiples tecnologías. Especialista en integración frontend-backend y optimización de aplicaciones.",
+    skills: ["React", "Node.js", "TypeScript", "PostgreSQL", "AWS"],
+    projects: 25,
+    contributions: 890,
+    icon: Database,
+    color: "purple",
+    social: {
+      github: "https://github.com/carlos-lopez",
+      linkedin: "https://linkedin.com/in/carlos-lopez",
+      email: "carlos.lopez@email.com",
+    },
   },
   {
-    id: "ana",
+    id: 4,
     name: "Ana Martínez",
     role: "UI/UX Designer & Developer",
-    image: "/placeholder.svg?height=200&width=200",
-    skills: ["Figma", "React", "Tailwind", "Responsive Design"],
+    location: "Mendoza, Argentina",
+    experience: "3 años",
+    avatar: "/placeholder-user.jpg",
     description:
-      "Diseñadora y desarrolladora enfocada en experiencia de usuario. Crea interfaces intuitivas y atractivas.",
-    responsibilities: ["Diseño UI/UX", "Prototipado", "Documentación del proyecto"],
-    socialLinks: [
-      { name: "GitHub", icon: Github, url: "https://github.com/ana-martinez", color: "hover:text-gray-800" },
-      { name: "LinkedIn", icon: Linkedin, url: "https://linkedin.com/in/ana-martinez", color: "hover:text-blue-600" },
-      { name: "Instagram", icon: Instagram, url: "https://instagram.com/ana_design", color: "hover:text-pink-500" },
-      { name: "Email", icon: Mail, url: "mailto:ana.martinez@email.com", color: "hover:text-teal-500" },
-    ],
+      "Diseñadora y desarrolladora enfocada en experiencia de usuario. Combina habilidades de diseño con conocimientos técnicos para crear interfaces excepcionales.",
+    skills: ["Figma", "React", "Tailwind CSS", "Adobe XD", "Prototyping"],
+    projects: 15,
+    contributions: 380,
+    icon: Palette,
+    color: "pink",
+    social: {
+      github: "https://github.com/ana-martinez",
+      linkedin: "https://linkedin.com/in/ana-martinez",
+      email: "ana.martinez@email.com",
+    },
   },
 ]
 
-// Componente de botones de redes sociales animados
-const AnimatedSocialButtons = ({ socialLinks }: { socialLinks: any[] }) => {
+// Componente de botones sociales animados
+const SocialButtons = ({ social }: { social: any }) => {
   return (
     <div className="flex gap-2">
-      {socialLinks.map((social) => {
-        const IconComponent = social.icon
-        return (
-          <a
-            key={social.name}
-            href={social.url}
-            target="_blank"
-            rel="noopener noreferrer"
-            className={`
-              group relative overflow-hidden rounded-full p-2 transition-all duration-300 ease-in-out
-              transform hover:scale-110 hover:shadow-lg
-              bg-gray-100 hover:bg-white border border-gray-200 hover:border-current
-              ${social.color}
-            `}
-            title={social.name}
-          >
-            <IconComponent className="w-4 h-4 transition-transform duration-300 group-hover:rotate-12" />
-
-            {/* Efecto de ondas al hover */}
-            <div className="absolute inset-0 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-              <div className="absolute inset-0 rounded-full animate-ping bg-current opacity-20"></div>
-            </div>
-
-            {/* Tooltip */}
-            <div className="absolute -top-8 left-1/2 transform -translate-x-1/2 bg-gray-800 text-white text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
-              {social.name}
-            </div>
-          </a>
-        )
-      })}
+      <a
+        href={social.github}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="p-2 rounded-full bg-gray-100 hover:bg-gray-800 hover:text-white transition-all duration-300 hover:scale-110"
+        title="GitHub"
+      >
+        <Github className="w-4 h-4" />
+      </a>
+      <a
+        href={social.linkedin}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="p-2 rounded-full bg-blue-50 hover:bg-blue-600 hover:text-white transition-all duration-300 hover:scale-110"
+        title="LinkedIn"
+      >
+        <Linkedin className="w-4 h-4" />
+      </a>
+      <a
+        href={`mailto:${social.email}`}
+        className="p-2 rounded-full bg-red-50 hover:bg-red-500 hover:text-white transition-all duration-300 hover:scale-110"
+        title="Email"
+      >
+        <Mail className="w-4 h-4" />
+      </a>
     </div>
   )
 }
 
 export default function EquipoPage() {
   return (
-    <div className="space-y-8">
-      <div className="text-center">
-        <h1 className="text-4xl font-bold mb-4">Nuestro Equipo</h1>
+    <div className="container mx-auto px-4 py-8 space-y-12">
+      {/* Header */}
+      <div className="text-center space-y-4">
+        <h1 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 text-transparent bg-clip-text">
+          Nuestro Equipo
+        </h1>
         <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-          Somos un equipo de 4 desarrolladores apasionados por crear aplicaciones web modernas y funcionales. Cada
-          integrante aporta sus habilidades únicas para lograr un proyecto exitoso.
+          Conoce a los profesionales apasionados que hacen posible nuestros proyectos. Un equipo diverso con experiencia
+          en desarrollo frontend, backend, full stack y diseño UX/UI.
         </p>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-        {teamMembers.map((member) => (
-          <Card key={member.id} className="hover:shadow-lg transition-shadow">
-            <CardHeader>
-              <div className="flex items-start gap-4">
-                <div className="w-20 h-20 rounded-full bg-gradient-to-br from-blue-400 to-purple-500 flex items-center justify-center flex-shrink-0">
-                  <span className="text-2xl font-bold text-white">
-                    {member.name
-                      .split(" ")
-                      .map((n) => n[0])
-                      .join("")}
-                  </span>
-                </div>
-                <div className="flex-1">
-                  <CardTitle className="text-xl">{member.name}</CardTitle>
-                  <CardDescription className="text-base font-medium text-blue-600">{member.role}</CardDescription>
-                </div>
-              </div>
-            </CardHeader>
-            <CardContent className="space-y-4">
-              <p className="text-gray-600">{member.description}</p>
-
-              <div>
-                <h4 className="font-semibold mb-2">Responsabilidades:</h4>
-                <ul className="list-disc list-inside text-sm text-gray-600 space-y-1">
-                  {member.responsibilities.map((resp, index) => (
-                    <li key={index}>{resp}</li>
-                  ))}
-                </ul>
-              </div>
-
-              <div>
-                <h4 className="font-semibold mb-2">Habilidades:</h4>
-                <div className="flex flex-wrap gap-2">
-                  {member.skills.map((skill) => (
-                    <Badge key={skill} variant="secondary">
-                      {skill}
-                    </Badge>
-                  ))}
-                </div>
-              </div>
-
-              <div className="flex gap-2 pt-4 items-center justify-between">
-                <Button asChild variant="outline" size="sm">
-                  <Link href={`/integrante/${member.id}`}>Ver Perfil Completo</Link>
-                </Button>
-
-                {/* Botones de redes sociales animados */}
-                <AnimatedSocialButtons socialLinks={member.socialLinks} />
-              </div>
-            </CardContent>
-          </Card>
-        ))}
+      {/* Estadísticas del equipo */}
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+        <div className="text-center p-6 bg-gradient-to-br from-blue-50 to-blue-100 rounded-xl">
+          <div className="text-3xl font-bold text-blue-600">4</div>
+          <div className="text-sm text-gray-600">Miembros del Equipo</div>
+        </div>
+        <div className="text-center p-6 bg-gradient-to-br from-green-50 to-green-100 rounded-xl">
+          <div className="text-3xl font-bold text-green-600">70+</div>
+          <div className="text-sm text-gray-600">Proyectos Completados</div>
+        </div>
+        <div className="text-center p-6 bg-gradient-to-br from-purple-50 to-purple-100 rounded-xl">
+          <div className="text-3xl font-bold text-purple-600">15+</div>
+          <div className="text-sm text-gray-600">Años de Experiencia</div>
+        </div>
+        <div className="text-center p-6 bg-gradient-to-br from-pink-50 to-pink-100 rounded-xl">
+          <div className="text-3xl font-bold text-pink-600">2340+</div>
+          <div className="text-sm text-gray-600">Contribuciones</div>
+        </div>
       </div>
 
-      <Card className="bg-blue-50">
-        <CardHeader>
-          <CardTitle>Metodología de Trabajo</CardTitle>
+      {/* Grid de miembros del equipo */}
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8">
+        {teamMembers.map((member) => {
+          const IconComponent = member.icon
+          return (
+            <Card
+              key={member.id}
+              className="group overflow-hidden hover:shadow-2xl transition-all duration-500 border-2 hover:border-opacity-50"
+              style={{ borderColor: `var(--${member.color}-200)` }}
+            >
+              {/* Header con gradiente */}
+              <div
+                className={`h-2 bg-gradient-to-r ${
+                  member.color === "blue"
+                    ? "from-blue-400 to-blue-600"
+                    : member.color === "green"
+                      ? "from-green-400 to-green-600"
+                      : member.color === "purple"
+                        ? "from-purple-400 to-purple-600"
+                        : "from-pink-400 to-pink-600"
+                }`}
+              ></div>
+
+              <CardHeader
+                className={`bg-gradient-to-r ${
+                  member.color === "blue"
+                    ? "from-blue-50 to-blue-100"
+                    : member.color === "green"
+                      ? "from-green-50 to-green-100"
+                      : member.color === "purple"
+                        ? "from-purple-50 to-purple-100"
+                        : "from-pink-50 to-pink-100"
+                } pb-4`}
+              >
+                <div className="flex items-start gap-4">
+                  <div className="relative">
+                    <Avatar className="w-20 h-20 border-4 border-white shadow-lg">
+                      <AvatarImage src={member.avatar || "/placeholder.svg"} alt={member.name} />
+                      <AvatarFallback
+                        className={`text-2xl font-bold text-white bg-gradient-to-br ${
+                          member.color === "blue"
+                            ? "from-blue-400 to-blue-600"
+                            : member.color === "green"
+                              ? "from-green-400 to-green-600"
+                              : member.color === "purple"
+                                ? "from-purple-400 to-purple-600"
+                                : "from-pink-400 to-pink-600"
+                        }`}
+                      >
+                        {member.name
+                          .split(" ")
+                          .map((n) => n[0])
+                          .join("")}
+                      </AvatarFallback>
+                    </Avatar>
+                    <div
+                      className={`absolute -bottom-2 -right-2 p-2 rounded-full bg-white shadow-lg ${
+                        member.color === "blue"
+                          ? "text-blue-600"
+                          : member.color === "green"
+                            ? "text-green-600"
+                            : member.color === "purple"
+                              ? "text-purple-600"
+                              : "text-pink-600"
+                      }`}
+                    >
+                      <IconComponent className="w-4 h-4" />
+                    </div>
+                  </div>
+                  <div className="flex-1">
+                    <CardTitle className="text-xl mb-1">{member.name}</CardTitle>
+                    <CardDescription
+                      className={`font-medium ${
+                        member.color === "blue"
+                          ? "text-blue-600"
+                          : member.color === "green"
+                            ? "text-green-600"
+                            : member.color === "purple"
+                              ? "text-purple-600"
+                              : "text-pink-600"
+                      }`}
+                    >
+                      {member.role}
+                    </CardDescription>
+                    <div className="flex items-center gap-4 mt-2 text-sm text-gray-600">
+                      <div className="flex items-center gap-1">
+                        <MapPin className="w-4 h-4" />
+                        <span>{member.location}</span>
+                      </div>
+                      <div className="flex items-center gap-1">
+                        <Calendar className="w-4 h-4" />
+                        <span>{member.experience}</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </CardHeader>
+
+              <CardContent className="pt-4 space-y-4">
+                <p className="text-gray-600 text-sm leading-relaxed">{member.description}</p>
+
+                {/* Estadísticas */}
+                <div className="grid grid-cols-2 gap-4">
+                  <div className="text-center p-3 bg-gray-50 rounded-lg">
+                    <div
+                      className={`text-2xl font-bold ${
+                        member.color === "blue"
+                          ? "text-blue-600"
+                          : member.color === "green"
+                            ? "text-green-600"
+                            : member.color === "purple"
+                              ? "text-purple-600"
+                              : "text-pink-600"
+                      }`}
+                    >
+                      {member.projects}
+                    </div>
+                    <div className="text-xs text-gray-600">Proyectos</div>
+                  </div>
+                  <div className="text-center p-3 bg-gray-50 rounded-lg">
+                    <div
+                      className={`text-2xl font-bold ${
+                        member.color === "blue"
+                          ? "text-blue-600"
+                          : member.color === "green"
+                            ? "text-green-600"
+                            : member.color === "purple"
+                              ? "text-purple-600"
+                              : "text-pink-600"
+                      }`}
+                    >
+                      {member.contributions}
+                    </div>
+                    <div className="text-xs text-gray-600">Contribuciones</div>
+                  </div>
+                </div>
+
+                {/* Habilidades */}
+                <div className="space-y-2">
+                  <p className="text-sm font-medium text-gray-700">Habilidades principales:</p>
+                  <div className="flex flex-wrap gap-1">
+                    {member.skills.map((skill) => (
+                      <Badge
+                        key={skill}
+                        variant="outline"
+                        className={`text-xs ${
+                          member.color === "blue"
+                            ? "border-blue-300 text-blue-700 bg-blue-50"
+                            : member.color === "green"
+                              ? "border-green-300 text-green-700 bg-green-50"
+                              : member.color === "purple"
+                                ? "border-purple-300 text-purple-700 bg-purple-50"
+                                : "border-pink-300 text-pink-700 bg-pink-50"
+                        }`}
+                      >
+                        {skill}
+                      </Badge>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Botones de acción */}
+                <div className="flex items-center justify-between pt-4 border-t">
+                  <SocialButtons social={member.social} />
+                  <Link href={`/integrante/${member.id}`}>
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      className={`hover:text-white transition-all duration-300 ${
+                        member.color === "blue"
+                          ? "border-blue-300 text-blue-700 hover:bg-blue-600"
+                          : member.color === "green"
+                            ? "border-green-300 text-green-700 hover:bg-green-600"
+                            : member.color === "purple"
+                              ? "border-purple-300 text-purple-700 hover:bg-purple-600"
+                              : "border-pink-300 text-pink-700 hover:bg-pink-600"
+                      }`}
+                    >
+                      <Users className="w-4 h-4 mr-1" />
+                      Ver Perfil
+                    </Button>
+                  </Link>
+                </div>
+              </CardContent>
+            </Card>
+          )
+        })}
+      </div>
+
+      {/* Sección de colaboración */}
+      <Card className="bg-gradient-to-r from-blue-50 to-purple-50 border-none">
+        <CardHeader className="text-center">
+          <CardTitle className="text-2xl">¿Quieres trabajar con nosotros?</CardTitle>
+          <CardDescription className="text-lg">
+            Estamos siempre abiertos a nuevas oportunidades y colaboraciones
+          </CardDescription>
         </CardHeader>
-        <CardContent>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div>
-              <h4 className="font-semibold mb-2">Organización:</h4>
-              <ul className="list-disc list-inside text-sm space-y-1">
-                <li>Reuniones diarias de seguimiento</li>
-                <li>División de tareas por especialidad</li>
-                <li>Revisión de código en equipo</li>
-                <li>Documentación continua del progreso</li>
-              </ul>
-            </div>
-            <div>
-              <h4 className="font-semibold mb-2">Herramientas:</h4>
-              <ul className="list-disc list-inside text-sm space-y-1">
-                <li>GitHub para control de versiones</li>
-                <li>Vercel para deployment</li>
-                <li>Discord para comunicación</li>
-                <li>Figma para diseño colaborativo</li>
-              </ul>
-            </div>
-          </div>
+        <CardContent className="text-center">
+          <Button className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-8 py-3">
+            <Mail className="w-4 h-4 mr-2" />
+            Contáctanos
+          </Button>
         </CardContent>
       </Card>
     </div>

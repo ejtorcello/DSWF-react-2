@@ -1,7 +1,21 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
-import { Github, Linkedin, Mail, ExternalLink, Code, Terminal, Laptop, Twitter, Instagram } from "lucide-react"
+import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel"
+import {
+  Github,
+  Linkedin,
+  Mail,
+  ExternalLink,
+  Code,
+  Terminal,
+  Laptop,
+  Twitter,
+  Instagram,
+  Calendar,
+  Users,
+  Star,
+} from "lucide-react"
 
 // Lista de habilidades para Juan
 const skills = ["JavaScript", "TypeScript", "React", "Next.js", "Tailwind CSS", "HTML5", "CSS3", "Git", "Redux", "Jest"]
@@ -15,28 +29,69 @@ const technologies = [
   { name: "Git", icon: "📝" },
 ]
 
-// Proyectos
+// Proyectos expandidos para el carrusel
 const projects = [
   {
     title: "E-commerce Platform",
-    description: "Plataforma de comercio electrónico desarrollada con React y Node.js",
-    tech: ["React", "Node.js", "MongoDB"],
+    description:
+      "Plataforma de comercio electrónico completa con carrito de compras, sistema de pagos y panel de administración",
+    tech: ["React", "Node.js", "MongoDB", "Stripe"],
     status: "Completado",
     link: "#",
+    image: "/placeholder.svg?height=200&width=300",
+    date: "2024",
+    team: "4 personas",
+    rating: 4.8,
+    features: ["Carrito de compras", "Pagos seguros", "Panel admin", "Responsive design"],
   },
   {
     title: "Task Management App",
-    description: "Aplicación de gestión de tareas con funcionalidades colaborativas",
-    tech: ["React", "TypeScript", "Firebase"],
+    description:
+      "Aplicación de gestión de tareas con funcionalidades colaborativas, notificaciones en tiempo real y integración con calendarios",
+    tech: ["React", "TypeScript", "Firebase", "Socket.io"],
     status: "En desarrollo",
     link: "#",
+    image: "/placeholder.svg?height=200&width=300",
+    date: "2024",
+    team: "3 personas",
+    rating: 4.6,
+    features: ["Colaboración en tiempo real", "Notificaciones", "Integración calendario", "Reportes"],
   },
   {
     title: "Portfolio Personal",
-    description: "Sitio web personal con blog integrado y sistema de contacto",
-    tech: ["Next.js", "Tailwind", "MDX"],
+    description: "Sitio web personal con blog integrado, sistema de contacto y optimización SEO completa",
+    tech: ["Next.js", "Tailwind", "MDX", "Vercel"],
     status: "Completado",
     link: "#",
+    image: "/placeholder.svg?height=200&width=300",
+    date: "2023",
+    team: "1 persona",
+    rating: 4.9,
+    features: ["Blog MDX", "SEO optimizado", "Formulario contacto", "Analytics"],
+  },
+  {
+    title: "Dashboard Analytics",
+    description: "Panel de control con métricas en tiempo real, gráficos interactivos y exportación de datos",
+    tech: ["React", "D3.js", "Chart.js", "API REST"],
+    status: "Completado",
+    link: "#",
+    image: "/placeholder.svg?height=200&width=300",
+    date: "2023",
+    team: "2 personas",
+    rating: 4.7,
+    features: ["Gráficos interactivos", "Tiempo real", "Exportar datos", "Filtros avanzados"],
+  },
+  {
+    title: "Learning Management System",
+    description: "Sistema de gestión de aprendizaje con cursos, evaluaciones y seguimiento de progreso",
+    tech: ["React", "Node.js", "PostgreSQL", "JWT"],
+    status: "En desarrollo",
+    link: "#",
+    image: "/placeholder.svg?height=200&width=300",
+    date: "2024",
+    team: "5 personas",
+    rating: 4.5,
+    features: ["Cursos multimedia", "Evaluaciones", "Progreso", "Certificados"],
   },
 ]
 
@@ -112,6 +167,109 @@ const AnimatedSocialButtons = () => {
           </a>
         )
       })}
+    </div>
+  )
+}
+
+// Componente del carrusel de proyectos
+const ProjectCarousel = () => {
+  return (
+    <div className="w-full max-w-5xl mx-auto">
+      <Carousel className="w-full">
+        <CarouselContent className="-ml-2 md:-ml-4">
+          {projects.map((project, index) => (
+            <CarouselItem key={index} className="pl-2 md:pl-4 md:basis-1/2 lg:basis-1/3">
+              <Card className="h-full border-2 border-blue-200 hover:border-blue-500 transition-all duration-300 hover:shadow-lg">
+                {/* Imagen del proyecto */}
+                <div className="relative overflow-hidden rounded-t-lg">
+                  <img
+                    src={project.image || "/placeholder.svg"}
+                    alt={project.title}
+                    className="w-full h-48 object-cover transition-transform duration-300 hover:scale-105"
+                  />
+                  <div className="absolute top-2 right-2">
+                    <Badge
+                      variant={
+                        project.status === "Completado"
+                          ? "default"
+                          : project.status === "En desarrollo"
+                            ? "secondary"
+                            : "outline"
+                      }
+                      className="bg-white/90 backdrop-blur-sm"
+                    >
+                      {project.status}
+                    </Badge>
+                  </div>
+                  {/* Rating */}
+                  <div className="absolute bottom-2 left-2 flex items-center gap-1 bg-black/70 text-white px-2 py-1 rounded-full text-xs">
+                    <Star className="w-3 h-3 fill-yellow-400 text-yellow-400" />
+                    <span>{project.rating}</span>
+                  </div>
+                </div>
+
+                <CardHeader className="bg-blue-50 pb-3">
+                  <CardTitle className="text-lg line-clamp-1">{project.title}</CardTitle>
+                  <div className="flex items-center gap-4 text-sm text-gray-600">
+                    <div className="flex items-center gap-1">
+                      <Calendar className="w-4 h-4" />
+                      <span>{project.date}</span>
+                    </div>
+                    <div className="flex items-center gap-1">
+                      <Users className="w-4 h-4" />
+                      <span>{project.team}</span>
+                    </div>
+                  </div>
+                </CardHeader>
+
+                <CardContent className="pt-4 space-y-4 flex-1 flex flex-col">
+                  <p className="text-gray-600 text-sm line-clamp-3 flex-1">{project.description}</p>
+
+                  {/* Tecnologías */}
+                  <div className="flex flex-wrap gap-1">
+                    {project.tech.slice(0, 3).map((tech) => (
+                      <Badge key={tech} variant="outline" className="text-xs">
+                        {tech}
+                      </Badge>
+                    ))}
+                    {project.tech.length > 3 && (
+                      <Badge variant="outline" className="text-xs">
+                        +{project.tech.length - 3}
+                      </Badge>
+                    )}
+                  </div>
+
+                  {/* Features principales */}
+                  <div className="space-y-1">
+                    <p className="text-xs font-medium text-gray-700">Características:</p>
+                    <div className="flex flex-wrap gap-1">
+                      {project.features.slice(0, 2).map((feature, idx) => (
+                        <span key={idx} className="text-xs bg-blue-100 text-blue-700 px-2 py-1 rounded">
+                          {feature}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+
+                  <Button variant="outline" size="sm" className="w-full mt-auto bg-transparent">
+                    <ExternalLink className="w-4 h-4 mr-1" />
+                    Ver Proyecto
+                  </Button>
+                </CardContent>
+              </Card>
+            </CarouselItem>
+          ))}
+        </CarouselContent>
+        <CarouselPrevious className="hidden md:flex" />
+        <CarouselNext className="hidden md:flex" />
+      </Carousel>
+
+      {/* Indicadores de puntos para móvil */}
+      <div className="flex justify-center mt-4 gap-2 md:hidden">
+        {projects.map((_, index) => (
+          <div key={index} className="w-2 h-2 rounded-full bg-gray-300 transition-colors duration-200" />
+        ))}
+      </div>
     </div>
   )
 }
@@ -211,45 +369,10 @@ export default function JuanProfile() {
         </div>
       </div>
 
-      {/* Proyectos - Estilo de tarjetas con bordes */}
+      {/* Carrusel de Proyectos Destacados */}
       <div>
         <h2 className="text-2xl font-bold mb-6">Proyectos Destacados</h2>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {projects.map((project, index) => (
-            <Card key={index} className="border-2 border-blue-200 hover:border-blue-500 transition-colors">
-              <CardHeader className="bg-blue-50">
-                <div className="flex justify-between items-start">
-                  <CardTitle className="text-lg">{project.title}</CardTitle>
-                  <Badge
-                    variant={
-                      project.status === "Completado"
-                        ? "default"
-                        : project.status === "En desarrollo"
-                          ? "secondary"
-                          : "outline"
-                    }
-                  >
-                    {project.status}
-                  </Badge>
-                </div>
-              </CardHeader>
-              <CardContent className="pt-4 space-y-4">
-                <p className="text-gray-600 text-sm">{project.description}</p>
-                <div className="flex flex-wrap gap-1">
-                  {project.tech.map((tech) => (
-                    <Badge key={tech} variant="outline" className="text-xs">
-                      {tech}
-                    </Badge>
-                  ))}
-                </div>
-                <Button variant="outline" size="sm" className="w-full bg-transparent">
-                  <ExternalLink className="w-4 h-4 mr-1" />
-                  Ver Proyecto
-                </Button>
-              </CardContent>
-            </Card>
-          ))}
-        </div>
+        <ProjectCarousel />
       </div>
 
       {/* Footer con estilo de código */}
